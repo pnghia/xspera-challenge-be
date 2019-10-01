@@ -9,7 +9,7 @@ router.get('/', async (req, res) => {
         const listBrands = await ProductService.getLatestProducts(brandID);
         return res.json(listBrands);
     } catch (error) {
-        console.log(error);
+        return res.status(500).send({ status: 'Something went wrong' });
     }
 });
 

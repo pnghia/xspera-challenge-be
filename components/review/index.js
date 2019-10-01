@@ -15,7 +15,7 @@ router.post('/', async (req, res) => {
         if (error.code === 400) {
             return res.status(400).send({ status: 'Bad Request' });
         }
-        return res.json({ status: 'Something went wrong' });
+        return res.status(500).send({ status: 'Something went wrong' });
     }
 });
 
