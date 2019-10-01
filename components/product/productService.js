@@ -5,7 +5,7 @@ const getLatestProducts = async brandID => {
     if (!listBrands.length) {
         return [{ status: 'Not Found', data: [] }];
     }
-    return [{ status: 'Not Found', data: listBrands }];
+    return [{ status: 'Success', data: listBrands }];
 };
 
 module.exports = {
