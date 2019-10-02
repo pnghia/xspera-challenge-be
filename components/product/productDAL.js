@@ -11,7 +11,7 @@ function getLatestProducts(brandID) {
             "user".username,
             review.comment
         FROM products 
-            JOIN review ON review.id = (SELECT id FROM review  ORDER BY id DESC LIMIT 1) 
+            LEFT JOIN review ON review.id = (SELECT id FROM review  ORDER BY id DESC LIMIT 1) 
             JOIN brands ON products.brand_id = brands.id
             LEFT JOIN "user" ON "user".id = review.user_id
         WHERE brand_id = $[brandID]

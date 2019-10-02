@@ -5,7 +5,7 @@ const ProductService = require('./productService');
 
 router.get('/:id?', async (req, res) => {
     try {
-        const { brandID } = req.query;
+        const { brand: brandID } = req.query;
         const { id: productID } = req.params;
         if (productID) {
             const productById = await ProductService.getProductById(productID);
