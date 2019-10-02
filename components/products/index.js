@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 
-const ProductService = require('./productService');
+const ProductService = require('./productsService');
 
 router.get('/:id?', async (req, res) => {
     try {

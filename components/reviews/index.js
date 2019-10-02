@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 
-const ReviewService = require('./reviewService');
+const ReviewService = require('./reviewsService');
 
 router.post('/', async (req, res) => {
     try {

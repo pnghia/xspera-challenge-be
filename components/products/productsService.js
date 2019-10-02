@@ -1,4 +1,4 @@
-const ProductDAL = require('./productDAL');
+const ProductDAL = require('./productsDAL');
 
 const getLatestProducts = async brandID => {
     const listBrands = await ProductDAL.getLatestProducts(brandID);

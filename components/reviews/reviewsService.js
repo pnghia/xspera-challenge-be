@@ -1,4 +1,4 @@
-const ReviewDAL = require('./reviewDAL');
+const ReviewDAL = require('./reviewsDAL');
 
 const addNewReview = async ({ rating, comment, productId, email }) => {
     const addReview = await ReviewDAL.addNewReview({ rating, comment, productId, email });
