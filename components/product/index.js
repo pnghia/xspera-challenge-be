@@ -3,9 +3,14 @@ const router = express.Router();
 
 const ProductService = require('./productService');
 
-router.get('/', async (req, res) => {
+router.get('/:id?', async (req, res) => {
     try {
         const { brandID } = req.query;
+        const { id: productID } = req.params;
+        if (productID) {
+            const productById = await ProductService.getProductById(productID);
+            return res.json(productById);
+        }
         const listBrands = await ProductService.getLatestProducts(brandID);
         return res.json(listBrands);
     } catch (error) {
