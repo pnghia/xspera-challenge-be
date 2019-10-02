@@ -9,9 +9,9 @@ function getLatestProducts(brandID) {
             products.description, 
             brands.name AS "brandName",
             "user".username,
-            review.comment
+            COALESCE(review.comment, '') as "comment"
         FROM products 
-            LEFT JOIN review ON review.id = (SELECT id FROM review  ORDER BY id DESC LIMIT 1) 
+            LEFT JOIN review ON (review.id = (SELECT id FROM review  ORDER BY id DESC LIMIT 1) AND review.product_id = products.id)
             JOIN brands ON products.brand_id = brands.id
             LEFT JOIN "user" ON "user".id = review.user_id
         WHERE brand_id = $[brandID]
@@ -29,9 +29,9 @@ function getLatestProducts(brandID) {
         products.description, 
         brands.name AS "brandName",
         "user".username,
-        review.comment
+        COALESCE(review.comment, '') as "comment"
     FROM products 
-        LEFT JOIN review ON review.id = (SELECT id FROM review  ORDER BY id DESC LIMIT 1) 
+        LEFT JOIN review ON (review.id = (SELECT id FROM review  ORDER BY id DESC LIMIT 1) AND review.product_id = products.id)
         JOIN brands ON products.brand_id = brands.id
         LEFT JOIN "user" ON "user".id = review.user_id
         ORDER BY created
@@ -47,9 +47,9 @@ function getProductByID(productID) {
             products.description, 
             brands.name AS "brandName",
             "user".username,
-            review.comment
+            COALESCE(review.comment, '') as "comment"
         FROM products 
-            LEFT JOIN review ON review.id = (SELECT id FROM review  ORDER BY id DESC LIMIT 1) 
+            LEFT JOIN review ON (review.id = (SELECT id FROM review  ORDER BY id DESC LIMIT 1) AND review.product_id = products.id)
             JOIN brands ON products.brand_id = brands.id
             LEFT JOIN "user" ON "user".id = review.user_id
         WHERE products.id = $[productID]
@@ -60,7 +60,7 @@ function getProductByID(productID) {
             },
         );
     }
-    return [];
+    return {};
 }
 
 module.exports = {

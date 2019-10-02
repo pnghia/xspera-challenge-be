@@ -8,16 +8,15 @@ const getLatestProducts = async brandID => {
     return { status: 'Success', data: listBrands };
 };
 
-
 const getProductById = async productID => {
     const product = await ProductDAL.getProductByID(productID);
     if (!product.length) {
-        return { status: 'Not Found', data: [] };
+        return { status: 'Not Found', data: {} };
     }
     return { status: 'Success', data: product };
 };
 
 module.exports = {
     getLatestProducts,
-    getProductById
+    getProductById,
 };
