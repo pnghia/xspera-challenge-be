@@ -4,8 +4,8 @@ const cors = require('cors');
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
 
-const productRouter = require('./components/product');
-const reviewRouter = require('./components/review');
+const productRouter = require('./components/products');
+const reviewRouter = require('./components/reviews');
 
 const app = express();
 
