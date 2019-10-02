@@ -11,7 +11,7 @@ function getLatestProducts(brandID) {
             "user".username,
             COALESCE(review.comment, '') as "comment"
         FROM products 
-            LEFT JOIN review ON (review.id = (SELECT id FROM review  ORDER BY id DESC LIMIT 1) AND review.product_id = products.id)
+            LEFT JOIN review ON (review.id = (SELECT id FROM review WHERE review.product_id = products.id ORDER BY id DESC LIMIT 1))
             JOIN brands ON products.brand_id = brands.id
             LEFT JOIN "user" ON "user".id = review.user_id
         WHERE brand_id = $[brandID]
@@ -31,7 +31,7 @@ function getLatestProducts(brandID) {
         "user".username,
         COALESCE(review.comment, '') as "comment"
     FROM products 
-        LEFT JOIN review ON (review.id = (SELECT id FROM review  ORDER BY id DESC LIMIT 1) AND review.product_id = products.id)
+        LEFT JOIN review ON (review.id = (SELECT id FROM review WHERE review.product_id = products.id ORDER BY id DESC LIMIT 1))
         JOIN brands ON products.brand_id = brands.id
         LEFT JOIN "user" ON "user".id = review.user_id
         ORDER BY created
@@ -49,7 +49,7 @@ function getProductByID(productID) {
             "user".username,
             COALESCE(review.comment, '') as "comment"
         FROM products 
-            LEFT JOIN review ON (review.id = (SELECT id FROM review  ORDER BY id DESC LIMIT 1) AND review.product_id = products.id)
+            LEFT JOIN review ON (review.id = (SELECT id FROM review WHERE review.product_id = products.id ORDER BY id DESC LIMIT 1))
             JOIN brands ON products.brand_id = brands.id
             LEFT JOIN "user" ON "user".id = review.user_id
         WHERE products.id = $[productID]
